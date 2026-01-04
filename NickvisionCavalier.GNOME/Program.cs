@@ -5,17 +5,35 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace NickvisionCavalier.GNOME;
 
 /// <summary>
-/// The Program 
+/// The Program
 /// </summary>
 public partial class Program
 {
     private readonly Adw.Application _application;
     private MainWindow? _mainWindow;
     private MainWindowController _mainWindowController;
+
+    /// <summary>
+    /// Static constructor to preload gtk4-layer-shell
+    /// </summary>
+    static Program()
+    {
+        // Load gtk4-layer-shell BEFORE any GTK initialization
+        try
+        {
+            NativeLibrary.Load("libgtk4-layer-shell.so");
+            Console.WriteLine("Successfully preloaded gtk4-layer-shell");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Warning: Could not preload gtk4-layer-shell: {ex.Message}");
+        }
+    }
 
     /// <summary>
     /// Main method

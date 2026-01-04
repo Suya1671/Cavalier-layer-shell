@@ -30,6 +30,22 @@ public class MainWindow : Adw.ApplicationWindow
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
+        Gtk4LayerShell.gtk_layer_init_for_window(Handle);
+        Gtk4LayerShell.gtk_layer_set_layer(Handle, GtkLayerShellLayer.Background);
+        Gtk4LayerShell.gtk_layer_set_namespace(Handle, "cavalier");
+
+        // Anchor to all edges for fullscreen background
+        Gtk4LayerShell.gtk_layer_set_anchor(Handle, GtkLayerShellEdge.Left, true);
+        Gtk4LayerShell.gtk_layer_set_anchor(Handle, GtkLayerShellEdge.Right, true);
+        Gtk4LayerShell.gtk_layer_set_anchor(Handle, GtkLayerShellEdge.Top, true);
+        Gtk4LayerShell.gtk_layer_set_anchor(Handle, GtkLayerShellEdge.Bottom, true);
+
+        // Don't reserve exclusive space
+        Gtk4LayerShell.gtk_layer_set_exclusive_zone(Handle, -1);
+
+        // Enable keyboard access for ctrl+, bind
+        Gtk4LayerShell.gtk_layer_set_keyboard_mode(Handle, GtkLayerShellKeyboardMode.OnDemand);
+
         //Window Settings
         _controller = controller;
         _application = application;
@@ -203,10 +219,25 @@ public class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private bool OnClose(Gtk.Window sender, EventArgs e)
     {
+        // Destroy GL context first
+        try
+        {
+            _drawingView?.SetVisible(false);
+            _drawingView?.Dispose();
+        }
+        catch { }
+
         _controller.SaveWindowSize((uint)DefaultWidth, (uint)DefaultHeight, IsMaximized());
-        _preferencesController.SaveConfiguration(); // Save configuration in case preferences dialog is opened
-        _drawingView.Dispose();
-        return false;
+        _preferencesController.SaveConfiguration();
+
+        // Force quit immediately - don't wait for cleanup
+        GLib.Functions.TimeoutAdd(0, 50, () =>
+        {
+            Environment.Exit(0);
+            return false;
+        });
+
+        return true; // Prevent default close behavior
     }
 
     /// <summary>

@@ -7,9 +7,10 @@
   - Runs on the background layer
   - Uses [gtk4-layer-shell](https://github.com/wmww/gtk4-layer-shell). **This is an additional dependency**
   - To access settings, you can either use the official app or use the keybind `Ctrl + ,` while on the layer shell.
+  - You can close with `Ctrl + q`
 - Comes with a devshell via <devenv.sh>
 
-**Linux and wayland only** For now. No clue how this would work on any other environment.
+**Linux and wayland only** for now. No clue how this would work on any other environment.
 
 # Features
 
@@ -18,6 +19,7 @@
 * Configure smoothing, noise reduction and a few other CAVA settings.
 
 # Installation
+**This is for the original project. I have no intent on publishing this fork to any package managers for now.**
 
 <a href='https://flathub.org/apps/org.nickvision.cavalier'><img width='140' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
@@ -26,7 +28,7 @@
 <a href="https://aur.archlinux.org/packages/cavalier"><img width='140' alt="Download from AUR" src="https://aur.archlinux.org/static/css/archnavbar/aurlogo.png"/></a>
 
 # Chat
-<a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
+Original project chat: <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
 # Contributing
 
