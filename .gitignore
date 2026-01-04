@@ -354,3 +354,14 @@ _nickbuild/
 
 # Cake tools
 tools/
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml

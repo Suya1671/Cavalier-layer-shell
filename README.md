@@ -2,6 +2,15 @@
 
  [![Translation status](https://hosted.weblate.org/widgets/nickvision-cavalier/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-cavalier/) ✨Powered by [Weblate](https://weblate.org/en/)✨
 
+# FORK FEATURES
+- Runs cavalier as a layer shell extension
+  - Runs on the background layer
+  - Uses [gtk4-layer-shell](https://github.com/wmww/gtk4-layer-shell). **This is an additional dependency**
+  - To access settings, you can either use the official app or use the keybind `Ctrl + ,` while on the layer shell.
+- Comes with a devshell via <devenv.sh>
+
+**Linux and wayland only** For now. No clue how this would work on any other environment.
+
 # Features
 
 * 11 drawing modes!
